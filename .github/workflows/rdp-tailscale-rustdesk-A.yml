@@ -63,10 +63,10 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
       max-parallel: 10
-    timeout-minutes: 2880
+    timeout-minutes: 360
     env:
-      RDP_USER: Bullettemporary
-      RDP_PASS: Bullet@12345
+      RDP_USER: Sadaqat
+      RDP_PASS: Saqi786.
 
     steps:
       # --- CRD FIRST (prevent code timeout) ---
