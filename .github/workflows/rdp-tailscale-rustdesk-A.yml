@@ -166,7 +166,7 @@ jobs:
       # --- Continue with the rest after CRD is launched ---
       - name: Decide hostname + runtime
         run: |
-          if ("${{ inputs.rdp_count }}" -gt 1) { $hn = "bullet${{ matrix.id }}" } else { $hn = "bullet" }
+          if ("${{ inputs.rdp_count }}" -gt 1) { $hn = "SAQI${{ matrix.id }}" } else { $hn = "SAQI" }
           "TS_HOSTNAME=$hn" | Out-File -Append $env:GITHUB_ENV
 
           function Yes($v){ "$v" -match '^(?i:true|1|yes|on)$' }
@@ -179,7 +179,7 @@ jobs:
           Write-Host "Hostname: $hn  | Runtime: $runtime"
 
       # ---------- PURGE only for SINGLE INSTANCE ----------
-      - name: Purge bullet* devices (single-instance only)
+      - name: Purge SAQI* devices (single-instance only)
         if: ${{ needs.setup.outputs.multi == '0' }}
         run: |
           function Yes($v){ "$v" -match '^(?i:true|1|yes|on)$' }
@@ -193,7 +193,7 @@ jobs:
                   Invoke-RestMethod -Method Delete -Uri "https://api.tailscale.com/api/v2/device/$($d.id)" -Headers @{ Authorization = "Basic $auth" } -ErrorAction SilentlyContinue
                 }
               }
-              Write-Host "Purged bullet* devices (if any)."
+              Write-Host "Purged SAQI* devices (if any)."
             } catch { Write-Host "Purge warning: $($_.Exception.Message)" }
           } else {
             Write-Host "Purge disabled."
